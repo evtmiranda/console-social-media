@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "d:\\github\\everton\\console-social-media\\venv\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
+}
