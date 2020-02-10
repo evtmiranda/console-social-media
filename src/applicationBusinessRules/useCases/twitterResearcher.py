@@ -1,6 +1,12 @@
-def getApplicationsWithMoreCitations(applications, fromDate, toDate, twitterApi):
-    hashtags = " OR #".join(applications)
+def getNumberCitationsOfApplication(application, fromDate, toDate, twitterApi):
+    application = application.split(" ")[0]
+    hashtag = "#" + application
 
-    twitterApplications = twitterApi.search(hashtags, fromDate, toDate)
+    tweets = twitterApi.search(hashtag, fromDate, toDate)
 
-    return twitterApplications
+    numberCitationsOfApplication = {
+        "application": application,
+        "citations": len(tweets['results']),
+    }
+
+    return numberCitationsOfApplication
