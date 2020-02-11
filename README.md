@@ -9,16 +9,36 @@ Esta aplicação é responsável por:
 
 ## Como usar
 
-Faça o download da aplicação e em seguida execute o comando abaixo a partir da pasta raiz do projeto:
+Faça o download da aplicação e em seguida execute os comandos abaixo para instalar as dependências da aplicação:
+
+Criação da virtualenv:
 
 ```
-python 
+virtualenv venv
 ```
 
-### Prerequisites
-
-What things you need to install the software and how to install them
+Ativação da virtualenv:
 
 ```
-Give examples
+venv\Scripts\activate
 ```
+
+Após o rodar o comando de ativação da virtualenv, instale os pacotes:
+
+```
+pip install python-dotenv requests
+```
+
+Após instalar os pacotes, crie um arquivo .env na pasta config. Existe um arquivo de exemplo na mesma pasta.
+
+Depois de criar o arquivo .env, execute a aplicação:
+
+```
+python src/interfaceAdapters/console/start.py
+```
+
+A aplicação irá criar 3 arquivos na pasta resources:
+
+database.db
+result.csv
+result.json
