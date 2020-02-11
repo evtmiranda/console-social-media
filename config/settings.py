@@ -11,6 +11,7 @@ load_dotenv(dotenv_path=env_path)
 
 APPLE_STORE_FILE_PATH = os.environ.get("APPLE_STORE_FILE_PATH")
 FILE_PATH = os.environ.get("FILE_PATH")
+DATABASE_FILE_FULL_PATH = os.environ.get("DATABASE_FILE_FULL_PATH")
 TWITTER_TOKEN_URL = os.environ.get("TWITTER_TOKEN_URL")
 TWITTER_SEARCH_URL = os.environ.get("TWITTER_SEARCH_URL")
 TWITTER_KEY = os.environ.get("TWITTER_KEY")
