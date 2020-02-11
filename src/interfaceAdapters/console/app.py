@@ -11,7 +11,7 @@ from src.applicationBusinessRules.useCases import (
     twitterResearcher,
     databaseWriter,
 )
-from config.settings import APPLE_STORE_FILE_PATH
+from config.settings import APPLE_STORE_FILE_PATH, APP_ENVIRONMENT
 import datetime
 import sys
 
@@ -31,7 +31,9 @@ def process():
         print("Obtendo as aplicações da categoria Music com mais avaliações...")
         musicApplications = __getTenMusicApplicationsWithMoreReviews(appleStoreFilePath)
 
-        print("Criando variáveis para pesquisar as citações das aplicações no twitter...")
+        print(
+            "Criando variáveis para pesquisar as citações das aplicações no twitter..."
+        )
         applications = []
         [applications.append(row["track_name"]) for row in bookApplications]
         [applications.append(row["track_name"]) for row in musicApplications]
@@ -42,15 +44,185 @@ def process():
         fromDate = yesterday.strftime("%Y%m%d2355")
         toDate = yesterday.strftime("%Y%m%d2359")
 
-        print("Pesquisando as citações das aplicações no twitter...")
-        applicationsWithMoreCitationsOnTwitter = __getApplicationsWithMoreCitationsOnTwitter(
-            applications, fromDate, toDate
-        )
+        result = []
 
-        print("Criando o objeto com os dados finais...")
-        result = __createFinalResultObject(
-            bookApplications, musicApplications, applicationsWithMoreCitationsOnTwitter
-        )
+        if APP_ENVIRONMENT == "development":
+            print("Aplicação no modo dev, um objeto mock será criado com os dados do twitter")
+
+            result = [
+                {
+                    "id": "302584613",
+                    "track_name": "Kindle – Read eBooks, Magazines & Textbooks",
+                    "n_citacoes": 32,
+                    "size_bytes": "169747456",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "379693831",
+                    "track_name": "Audible – audio books, original series & podcasts",
+                    "n_citacoes": 5,
+                    "size_bytes": "81558528",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "1031002863",
+                    "track_name": "Color Therapy Adult Coloring Book for Adults",
+                    "n_citacoes": 4,
+                    "size_bytes": "135236608",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "366869252",
+                    "track_name": "OverDrive – Library eBooks and Audiobooks",
+                    "n_citacoes": 0,
+                    "size_bytes": "39844864",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "1024818709",
+                    "track_name": "HOOKED - Chat Stories",
+                    "n_citacoes": 0,
+                    "size_bytes": "94545920",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "476508724",
+                    "track_name": "A Charlie Brown Christmas + iMessage Sticker Pack!",
+                    "n_citacoes": 3,
+                    "size_bytes": "121874432",
+                    "price": "5.99",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "876336838",
+                    "track_name": "喜马拉雅FM（听书社区）电台有声小说相声英语",
+                    "n_citacoes": 0,
+                    "size_bytes": "130731008",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "444553118",
+                    "track_name": "Jesus Calling Devotional by Sarah Young",
+                    "n_citacoes": 19,
+                    "size_bytes": "125770752",
+                    "price": "9.99",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "906936224",
+                    "track_name": "快看漫画",
+                    "n_citacoes": 0,
+                    "size_bytes": "63058944",
+                    "price": "0",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "1061132313",
+                    "track_name": "CHOMP by Christoph Niemann",
+                    "n_citacoes": 0,
+                    "size_bytes": "49474560",
+                    "price": "1.99",
+                    "prime_genre": "Book",
+                },
+                {
+                    "id": "284035177",
+                    "track_name": "Pandora - Music & Radio",
+                    "n_citacoes": 0,
+                    "size_bytes": "130242560",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "324684580",
+                    "track_name": "Spotify Music",
+                    "n_citacoes": 20,
+                    "size_bytes": "132510720",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "284993459",
+                    "track_name": "Shazam - Discover music, artists, videos & lyrics",
+                    "n_citacoes": 0,
+                    "size_bytes": "147093504",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "290638154",
+                    "track_name": "iHeartRadio – Free Music & Radio Stations",
+                    "n_citacoes": 6,
+                    "size_bytes": "116443136",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "336353151",
+                    "track_name": "SoundCloud - Music & Audio",
+                    "n_citacoes": 61,
+                    "size_bytes": "105009152",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "421254504",
+                    "track_name": "Magic Piano by Smule",
+                    "n_citacoes": 7,
+                    "size_bytes": "55030784",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "509993510",
+                    "track_name": "Smule Sing!",
+                    "n_citacoes": 3,
+                    "size_bytes": "109940736",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "418987775",
+                    "track_name": "TuneIn Radio - MLB NBA Audiobooks Podcasts Music",
+                    "n_citacoes": 4,
+                    "size_bytes": "101735424",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "510855668",
+                    "track_name": "Amazon Music",
+                    "n_citacoes": 45,
+                    "size_bytes": "77778944",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+                {
+                    "id": "355554941",
+                    "track_name": "SoundHound Song Search & Music Player",
+                    "n_citacoes": 2,
+                    "size_bytes": "70516736",
+                    "price": "0",
+                    "prime_genre": "Music",
+                },
+            ]
+        else:
+            print("Pesquisando as citações das aplicações no twitter...")
+            applicationsWithMoreCitationsOnTwitter = __getApplicationsWithMoreCitationsOnTwitter(
+                applications, fromDate, toDate
+            )
+
+            print("Criando o objeto com os dados finais...")
+            result = __createFinalResultObject(
+                bookApplications,
+                musicApplications,
+                applicationsWithMoreCitationsOnTwitter,
+            )
 
         print("Salvando os dados no arquivo .json...")
         __saveJsonResult(result)
@@ -58,7 +230,7 @@ def process():
         print("Salvando os dados no arquivo .csv...")
         __saveCsvResult(result)
 
-        print("Salvando os dados no banco de dados .csv...")
+        print("Salvando os dados no banco de dados...")
         __saveDatabaseResult(result)
 
         print("Processo concluído.")

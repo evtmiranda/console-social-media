@@ -9,6 +9,7 @@ from pathlib import Path
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
 
+APP_ENVIRONMENT = os.environ.get("APP_ENVIRONMENT")
 APPLE_STORE_FILE_PATH = os.environ.get("APPLE_STORE_FILE_PATH")
 FILE_PATH = os.environ.get("FILE_PATH")
 DATABASE_FILE_FULL_PATH = os.environ.get("DATABASE_FILE_FULL_PATH")
