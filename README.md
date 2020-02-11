@@ -9,7 +9,7 @@ Esta aplicação é responsável por:
 
 ## Como usar
 
-Faça o download da aplicação e em seguida execute os comandos abaixo para instalar as dependências da aplicação:
+Faça o download da aplicação e em seguida execute os comandos abaixo na pasta raiz do projeto para instalar as dependências da aplicação:
 
 Criação da virtualenv:
 
